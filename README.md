@@ -15,11 +15,17 @@ ubuntu-install
 3:一键安装NVIDIA显卡驱动
 
 4:一键安装CUDA (默认13.1)
+
 5:一键安装NCCL (GPU通信库)
+
 6:一键安装Conda3
+
 7:一键安装NVIDIA-P2P驱动
+
 8:一键卸载NVIDIA驱动（卸载后不可恢复）
+
 9:一键安装Docker & Docker Compose
 
 0:退出
+
 请输入[]内的数字选择功能:
