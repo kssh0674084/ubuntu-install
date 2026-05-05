@@ -4,6 +4,9 @@
 BASE_DIR=$(cd "$(dirname "$0")" && pwd)
 cd "$BASE_DIR"
 
+# 修复Python路径 & 翻译模块
+export PYTHONPATH="$BASE_DIR"
+
 # 无限循环主菜单
 while true
 do
@@ -22,7 +25,7 @@ do
     echo "  [6]:一键安装Conda3"
     echo "  [7]:一键安装NVIDIA-P2P驱动"
     echo "  [8]:一键卸载NVIDIA驱动（卸载后不可恢复）"
-    echo "  [9]:一键安装Docker & Docker Compose"  # ✅ 新加
+    echo "  [9]:一键安装Docker & Docker Compose"
     echo ""
     echo "[0]:退出"
     echo ""
@@ -36,17 +39,17 @@ do
 
     # 执行脚本（全部统一等待，不会没反应）
     if [ "$num" = "1" ]; then
-        python3 "$BASE_DIR/tools/tool_config_system_source.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_config_system_source
     elif [ "$num" = "2" ]; then
-        python3 "$BASE_DIR/tools/tool_install_ssh.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_install_ssh
     elif [ "$num" = "3" ]; then
-        python3 "$BASE_DIR/tools/tool_install_nvidia_driver.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_install_nvidia_driver
     elif [ "$num" = "4" ]; then
-        python3 "$BASE_DIR/tools/tool_install_cuda.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_install_cuda
     elif [ "$num" = "5" ]; then
-        python3 "$BASE_DIR/tools/tool_install_nccl.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_install_nccl
     elif [ "$num" = "6" ]; then
-        python3 "$BASE_DIR/tools/tool_install_conda.py"
+        cd "$BASE_DIR" && python3 -m tools.tool_install_conda
     elif [ "$num" = "7" ]; then
         chmod +x "$BASE_DIR/tools/nvidia_install.sh"
         bash "$BASE_DIR/tools/nvidia_install.sh"
@@ -63,14 +66,12 @@ do
             echo -e "\n✅ 已取消卸载！"
         fi
     elif [ "$num" = "9" ]; then
-        # ✅ 安装Docker & Compose（和你其他脚本完全一样风格）
         echo -e "\n🐳 开始安装 Docker & Docker Compose..."
         chmod +x "$BASE_DIR/tools/docker&compose.sh"
         bash "$BASE_DIR/tools/docker&compose.sh"
         echo -e "\n✅ Docker 安装完成！"
     fi
 
-    # 统一：执行完按回车返回
     echo -e "\n按回车键返回主菜单..."
     read dummy
 
